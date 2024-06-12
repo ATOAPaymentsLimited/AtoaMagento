@@ -1,0 +1,62 @@
+<div class="payment-method" data-bind="css: {'_active': (getCode() == isChecked())}">
+    <div class="payment-method-title atoa-payment-title field choice">
+        <input type="radio"
+               name="atoa"
+               class="radio"
+               data-bind="
+                   attr: {'id': getCode()},
+                   value: getCode(),
+                   checked: isChecked,
+                   click: selectPaymentMethod,
+                   visible: isRadioButtonVisible()
+               "
+        ></input>
+        <label data-bind="attr: {'for': getCode()}" class="atoa-payment-label">
+            <span data-bind="text: getTitle()"></span>
+            <span data-bind="attr: { class: getStyle() }">
+                <span class="payment-text">
+                    <span data-bind="text: getBannerCheckoutText()"></span>
+                    <span class="icon"></span>
+                </span>
+                <span class="bank-support">
+                    <!-- Atoa Bank Logos -->
+                        <img alt="" data-bind="attr: {src: getBankLogosSrc(), alt: getTitle()}" class="payment-banks logo-desktop" />
+                        <img alt="" data-bind="attr: {src: getMobileBankLogosSrc(), alt: getTitle()}" class="payment-banks logo-mobile" />
+                    <!-- Atoa Bank Logos -->
+                </span>
+            </span>
+        </label>
+    </div>
+    <div class="payment-method-content">
+        <!-- ko foreach: getRegion('messages') -->
+        <!-- ko template: getTemplate() --><!-- /ko -->
+        <!--/ko-->
+        <div class="payment-method-billing-address">
+            <!-- ko foreach: $parent.getRegion(getBillingAddressFormName()) -->
+            <!-- ko template: getTemplate() --><!-- /ko -->
+            <!--/ko-->
+        </div>
+        <div class="checkout-agreements-block">
+            <!-- ko foreach: $parent.getRegion('before-place-order') -->
+            <!-- ko template: getTemplate() --><!-- /ko -->
+            <!--/ko-->
+        </div>
+
+        <div class="actions-toolbar">
+            <div class="primary">
+                <button data-role="review-save"
+                        type="submit"
+                        data-bind="
+                            attr: {title: $t('Place Order')},
+                            enable: (getCode() == isChecked()),
+                            click: placeOrder,
+                            css: {disabled: !isPlaceOrderActionAllowed()}
+                        "
+                        class="action primary checkout"
+                        disabled>
+                    <span data-bind="i18n: 'Place Order'"></span>
+                </button>
+            </div>
+        </div>
+    </div>
+</div>

@@ -1,0 +1,10 @@
+<?php
+/** @var Title $block */
+
+use Atoa\AtoaPayment\Block\Html\Title;
+
+?>
+
+<?php if ($block->getMessage()): ?>
+    <div class="atoa-messages"><?= /* @noEscape */$block->getMessage() ?></div>
+<?php endif; ?>

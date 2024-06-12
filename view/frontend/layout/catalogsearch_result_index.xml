@@ -1,0 +1,104 @@
+<?xml version="1.0"?>
+<page xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+      xsi:noNamespaceSchemaLocation="urn:magento:framework:View/Layout/etc/page_configuration.xsd">
+    <body>
+        <attribute name="class" value="atoa-payment-listing-page"/>
+        <referenceBlock name="category.product.type.details.renderers">
+            <block name="category.product.type.details.renderers.default" as="default"
+                   before="-"
+                   ifconfig="payment/atoa/atoa_display_settings/enable_banner_product_listing"
+                   template="Atoa_AtoaPayment::banner/product-listing.phtml">
+                <block name="category.product.type.details.renderers.default.banner.content"
+                       as="banner.content"
+                       template="Atoa_AtoaPayment::banner/banner-content.phtml">
+                    <arguments>
+                        <argument name="view_model" xsi:type="object">
+                            Atoa\AtoaPayment\ViewModel\Display
+                        </argument>
+                    </arguments>
+                </block>
+                <arguments>
+                    <argument name="view_model" xsi:type="object">
+                        Atoa\AtoaPayment\ViewModel\Display
+                    </argument>
+                </arguments>
+            </block>
+            <block name="category.product.type.details.renderers.configurable" as="configurable"
+                   before="-"
+                   ifconfig="payment/atoa/atoa_display_settings/enable_banner_product_listing"
+                   template="Atoa_AtoaPayment::banner/product-listing.phtml">
+                <block name="category.product.type.details.renderers.configurable.banner.content"
+                       as="banner.content"
+                       template="Atoa_AtoaPayment::banner/banner-content.phtml">
+                    <arguments>
+                        <argument name="view_model" xsi:type="object">
+                            Atoa\AtoaPayment\ViewModel\Display
+                        </argument>
+                    </arguments>
+                </block>
+                <arguments>
+                    <argument name="view_model" xsi:type="object">
+                        Atoa\AtoaPayment\ViewModel\Display
+                    </argument>
+                </arguments>
+            </block>
+            <block name="category.product.type.details.renderers.grouped" as="grouped"
+                   before="-"
+                   ifconfig="payment/atoa/atoa_display_settings/enable_banner_product_listing"
+                   template="Atoa_AtoaPayment::banner/product-listing.phtml">
+                <block name="category.product.type.details.renderers.grouped.banner.content"
+                       as="banner.content"
+                       template="Atoa_AtoaPayment::banner/banner-content.phtml">
+                    <arguments>
+                        <argument name="view_model" xsi:type="object">
+                            Atoa\AtoaPayment\ViewModel\Display
+                        </argument>
+                    </arguments>
+                </block>
+                <arguments>
+                    <argument name="view_model" xsi:type="object">
+                        Atoa\AtoaPayment\ViewModel\Display
+                    </argument>
+                </arguments>
+            </block>
+            <block name="category.product.type.details.renderers.bundle" as="bundle"
+                   before="-"
+                   ifconfig="payment/atoa/atoa_display_settings/enable_banner_product_listing"
+                   template="Atoa_AtoaPayment::banner/product-listing.phtml">
+                <block name="category.product.type.details.renderers.bundle.banner.content"
+                       as="banner.content"
+                       template="Atoa_AtoaPayment::banner/banner-content.phtml">
+                    <arguments>
+                        <argument name="view_model" xsi:type="object">
+                            Atoa\AtoaPayment\ViewModel\Display
+                        </argument>
+                    </arguments>
+                </block>
+                <arguments>
+                    <argument name="view_model" xsi:type="object">
+                        Atoa\AtoaPayment\ViewModel\Display
+                    </argument>
+                </arguments>
+            </block>
+            <block name="category.product.type.details.renderers.virtual" as="virtual"
+                   before="-"
+                   ifconfig="payment/atoa/atoa_display_settings/enable_banner_product_listing"
+                   template="Atoa_AtoaPayment::banner/product-listing.phtml">
+                <block name="category.product.type.details.renderers.virtual.banner.content"
+                       as="banner.content"
+                       template="Atoa_AtoaPayment::banner/banner-content.phtml">
+                    <arguments>
+                        <argument name="view_model" xsi:type="object">
+                            Atoa\AtoaPayment\ViewModel\Display
+                        </argument>
+                    </arguments>
+                </block>
+                <arguments>
+                    <argument name="view_model" xsi:type="object">
+                        Atoa\AtoaPayment\ViewModel\Display
+                    </argument>
+                </arguments>
+            </block>
+        </referenceBlock>
+    </body>
+</page>

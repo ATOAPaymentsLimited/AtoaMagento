@@ -1,0 +1,24 @@
+<?php
+/** @var GenerateWebhookUrl $block */
+
+use Atoa\AtoaPayment\Block\Adminhtml\System\Config\GenerateWebhookUrl;
+
+?>
+<div data-bind="scope: 'generate-webhook-url'" class="scalable">
+    <!-- ko template: getTemplate() --><!-- /ko -->
+</div>
+<script type="text/x-magento-init">
+    {
+        "*": {
+            "Magento_Ui/js/core/app": {
+                "components": {
+                    "generate-webhook-url": {
+                        "component": "Atoa_AtoaPayment/js/generate",
+                        "url": "<?= /* @noEscape */ $block->getAjaxUrl() ?>",
+                        "buttonLabel": "<?= /* @noEscape */ $block->getButtonLabel() ?>"
+                    }
+                }
+            }
+        }
+    }
+</script>

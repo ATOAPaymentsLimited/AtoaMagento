@@ -1,0 +1,13 @@
+<?php
+/** @var WebhookUrl $block */
+
+use Atoa\AtoaPayment\Block\Adminhtml\System\Config\WebhookUrl;
+
+?>
+<input
+    id="webhook_url"
+    name="groups[atoa][fields][webhook_url][value]"
+    class="admin__control-text"
+    value="<?= /* @noEscape */ $block->getValue() ?>"
+    readonly="readonly"
+    type="text" />

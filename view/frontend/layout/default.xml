@@ -1,0 +1,33 @@
+<?xml version="1.0"?>
+<page xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+      xsi:noNamespaceSchemaLocation="urn:magento:framework:View/Layout/etc/page_configuration.xsd">
+    <body>
+        <attribute name="class" value="atoa-payment-page"/>
+        <referenceContainer name="page.top">
+            <block name="atoa.store.view.banner"
+                   after="navigation.sections"
+                   ifconfig="payment/atoa/atoa_display_settings/enable_store_view_banner"
+                   template="Atoa_AtoaPayment::banner/store-view.phtml">
+                <block name="atoa.store.view.banner.content"
+                       as="banner.content"
+                       template="Atoa_AtoaPayment::banner/banner-content.phtml">
+                    <arguments>
+                        <argument name="view_model" xsi:type="object">
+                            Atoa\AtoaPayment\ViewModel\Display
+                        </argument>
+                    </arguments>
+                </block>
+                <arguments>
+                    <argument name="view_model" xsi:type="object">
+                        Atoa\AtoaPayment\ViewModel\Display
+                    </argument>
+                </arguments>
+            </block>
+        </referenceContainer>
+        <referenceContainer name="before.body.end">
+            <block name="atoa.payment.information.popup"
+                   ifconfig="payment/atoa/atoa_display_settings/enable_information_popup"
+                   template="Atoa_AtoaPayment::banner/information-modal.phtml" />
+        </referenceContainer>
+    </body>
+</page>

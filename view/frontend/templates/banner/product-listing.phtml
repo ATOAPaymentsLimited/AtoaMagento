@@ -1,0 +1,16 @@
+<?php
+/** @var Template $block */
+/** @var Display $viewModel */
+
+use Atoa\AtoaPayment\ViewModel\Display;
+use Magento\Framework\View\Element\Template;
+
+$viewModel = $block->getData('view_model');
+$bannerStyles = $viewModel->getDisplayStyles();
+?>
+<div class="atoa-payment-banner product-listing-banner style<?= /* @noEscape */ $bannerStyles ?>">
+    <?= /* @noEscape */ $block->getChildHtml('banner.content') ?>
+</div>
+
+
+

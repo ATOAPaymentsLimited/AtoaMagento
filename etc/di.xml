@@ -1,0 +1,119 @@
+<?xml version="1.0"?>
+<config xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+        xsi:noNamespaceSchemaLocation="urn:magento:framework:ObjectManager/etc/config.xsd">
+    <virtualType name="AtoaAdapter" type="Magento\Payment\Model\Method\Adapter">
+        <arguments>
+            <argument name="code" xsi:type="const">
+                Atoa\AtoaPayment\Model\Payment\Atoa::CODE
+            </argument>
+            <argument name="formBlockType" xsi:type="string">Magento\Payment\Block\Form\Cc</argument>
+            <argument name="infoBlockType" xsi:type="string">Magento\Payment\Block\Info</argument>
+            <argument name="valueHandlerPool" xsi:type="object">AtoaValueHandlerPool</argument>
+            <argument name="validatorPool" xsi:type="object">AtoaValidatorPool</argument>
+            <argument name="commandPool" xsi:type="object">AtoaCommandPool</argument>
+        </arguments>
+    </virtualType>
+
+    <virtualType name="AtoaValueHandlerPool" type="Magento\Payment\Gateway\Config\ValueHandlerPool">
+        <arguments>
+            <argument name="handlers" xsi:type="array">
+                <item name="default" xsi:type="string">AtoaConfigValueHandler</item>
+            </argument>
+        </arguments>
+    </virtualType>
+
+    <virtualType name="AtoaConfigValueHandler" type="Magento\Payment\Gateway\Config\ConfigValueHandler">
+        <arguments>
+            <argument name="configInterface" xsi:type="object">AtoaConfig</argument>
+        </arguments>
+    </virtualType>
+
+    <virtualType name="AtoaConfig" type="Magento\Payment\Gateway\Config\Config">
+        <arguments>
+            <argument name="methodCode" xsi:type="const">
+                Atoa\AtoaPayment\Model\Payment\Atoa::CODE
+            </argument>
+        </arguments>
+    </virtualType>
+
+    <virtualType name="AtoaValidatorPool" type="Magento\Payment\Gateway\Validator\ValidatorPool">
+        <arguments>
+            <argument name="validators" xsi:type="array">
+            </argument>
+        </arguments>
+    </virtualType>
+
+    <virtualType name="AtoaCommandPool" type="Magento\Payment\Gateway\Command\CommandPool">
+        <arguments>
+            <argument name="commands" xsi:type="array">
+                <item name="initialize" xsi:type="string">AtoaInitializeCommand</item>
+                <item name="authorize" xsi:type="string">AtoaAuthorizeCommand</item>
+            </argument>
+        </arguments>
+    </virtualType>
+
+    <virtualType name="AtoaInitializeCommand"
+                 type="Atoa\AtoaPayment\Gateway\Command\StrategyCommand">
+        <arguments>
+            <argument name="commandPool" xsi:type="object">AtoaCommandPool</argument>
+        </arguments>
+    </virtualType>
+
+    <virtualType name="AtoaAuthorizeCommand" type="Magento\Payment\Gateway\Command\GatewayCommand">
+        <arguments>
+            <argument name="requestBuilder" xsi:type="object">AtoaAuthorizeRequest</argument>
+            <argument name="transferFactory" xsi:type="object">
+                Atoa\AtoaPayment\Gateway\Http\TransferFactory
+            </argument>
+            <argument name="client" xsi:type="object">
+                Atoa\AtoaPayment\Gateway\Http\Client\PaymentAtoa
+            </argument>
+            <argument name="handler" xsi:type="object">AtoaResponseHandler</argument>
+            <argument name="validator" xsi:type="object">
+                Atoa\AtoaPayment\Gateway\Validator\ResponseAtoaValidator
+            </argument>
+        </arguments>
+    </virtualType>
+
+    <virtualType name="AtoaAuthorizeRequest" type="Magento\Payment\Gateway\Request\BuilderComposite">
+        <arguments>
+            <argument name="builders" xsi:type="array">
+                <item name="payment" xsi:type="string">
+                    Atoa\AtoaPayment\Gateway\Request\PaymentDataAtoaBuilder
+                </item>
+            </argument>
+        </arguments>
+    </virtualType>
+
+    <virtualType name="AtoaResponseHandler" type="Magento\Payment\Gateway\Response\HandlerChain">
+        <arguments>
+            <argument name="handlers" xsi:type="array">
+                <item name="paymentDetails" xsi:type="string">
+                    Atoa\AtoaPayment\Gateway\Response\PaymentAtoaDetailsHandler
+                </item>
+                <item name="pendingInvoice" xsi:type="string">
+                    Atoa\AtoaPayment\Gateway\Response\PendingInvoiceHandler
+                </item>
+            </argument>
+        </arguments>
+    </virtualType>
+
+    <type name="Atoa\AtoaPayment\Logger\AtoaPaymentLogger">
+        <arguments>
+            <argument name="name" xsi:type="string">atoaPaymentLogger</argument>
+            <argument name="handlers" xsi:type="array">
+                <item name="debug" xsi:type="object">Atoa\AtoaPayment\Logger\Handler\AtoaPaymentClient</item>
+            </argument>
+        </arguments>
+    </type>
+
+    <preference for="Atoa\AtoaPayment\Api\RedirectInterface" type="Atoa\AtoaPayment\Model\Redirect" />
+    <preference for="Atoa\AtoaPayment\Api\Data\RedirectDataInterface" type="Atoa\AtoaPayment\Model\Data\Redirect" />
+
+    <preference for="Atoa\AtoaPayment\Api\WebhookInterface" type="Atoa\AtoaPayment\Model\Webhook" />
+    <preference for="Atoa\AtoaPayment\Api\Data\StoreDetailsDataInterface" type="Atoa\AtoaPayment\Model\Data\StoreDetails" />
+    <preference for="Atoa\AtoaPayment\Api\Data\StatusDetailsDataInterface" type="Atoa\AtoaPayment\Model\Data\StatusDetails" />
+    <preference for="Atoa\AtoaPayment\Api\Data\IsoStatusDataInterface" type="Atoa\AtoaPayment\Model\Data\IsoStatus" />
+
+    <preference for="Atoa\AtoaPayment\Api\ExpiredWebhookInterface" type="Atoa\AtoaPayment\Model\ExpiredWebhook" />
+</config>
