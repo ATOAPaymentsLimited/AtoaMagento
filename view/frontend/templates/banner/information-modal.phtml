@@ -1,0 +1,55 @@
+<?php
+/** @var Template $block */
+
+use Magento\Framework\View\Element\Template;
+
+?>
+<div id="atoa-information-modal" class="atoa-information-modal"  style="display: none;">
+    <div class="info-content">
+        <img src="<?= /* @noEscape */ $block->getViewFileUrl('Atoa_AtoaPayment::images/atoa-claret-icon.png')?>"
+             alt="<?= /* @noEscape */ __('Atoa') ?>"
+             width="90"
+        />
+        <p class="heading"><?= /* @noEscape */ __('Help this business save on expensive card fees and with Atoa') ?></p>
+        <span><?= /* @noEscape */ __('Atoa allows you to pay easily using your UK bank app') ?></span>
+        <ul>
+            <li>
+                <img src="<?= /* @noEscape */ $block->getViewFileUrl('Atoa_AtoaPayment::images/step-icon-1.png')?>"
+                     alt=""
+                />
+                <?= /* @noEscape */ __('Choose Atoa at checkout') ?>
+            </li>
+            <li>
+                <img src="<?= /* @noEscape */ $block->getViewFileUrl('Atoa_AtoaPayment::images/step-icon-2.png')?>"
+                     alt=""
+                />
+                <?= /* @noEscape */ __('Choose which bank to pay securely from') ?>
+            </li>
+            <li>
+                <img src="<?= /* @noEscape */ $block->getViewFileUrl('Atoa_AtoaPayment::images/step-icon-3.png')?>"
+                     alt=""
+                />
+                <?= /* @noEscape */ __('Instant settlements') ?>
+            </li>
+            <li>
+                <img src="<?= /* @noEscape */ $block->getViewFileUrl('Atoa_AtoaPayment::images/step-icon-4.png')?>"
+                     alt=""
+                />
+                <?= /* @noEscape */ __('Download the app to claim your £3 reward') ?>
+            </li>
+        </ul>
+    </div>
+    <div class="active-banks">
+        <img src="<?= /* @noEscape */ $block->getViewFileUrl('Atoa_AtoaPayment::images/bank-support.png')?>"
+             alt=""
+        />
+    </div>
+</div>
+
+<script type="text/x-magento-init">
+    {
+        "*": {
+            "Atoa_AtoaPayment/js/information-popup": {}
+        }
+    }
+</script>

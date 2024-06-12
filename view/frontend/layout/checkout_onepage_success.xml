@@ -1,0 +1,33 @@
+<?xml version="1.0"?>
+<page xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+      xsi:noNamespaceSchemaLocation="urn:magento:framework:View/Layout/etc/page_configuration.xsd">
+    <body>
+        <referenceContainer name="order.success.additional.info">
+            <block class="Atoa\AtoaPayment\Block\Banner\ClaimReward"
+                   name="atoa.order.success.claim.reward"
+                   before="-"
+                   ifconfig="payment/atoa/atoa_checkout_setting/enable_banner_checkout"
+                   template="Atoa_AtoaPayment::banner/claim-reward.phtml">
+                <arguments>
+                    <argument name="view_model" xsi:type="object">
+                        Atoa\AtoaPayment\ViewModel\Display
+                    </argument>
+                </arguments>
+            </block>
+        </referenceContainer>
+
+        <referenceBlock name="page.main.title" remove="true" />
+        <referenceContainer name="columns.top">
+            <block class="Atoa\AtoaPayment\Block\Html\Title"
+                   name="page.main.title.atoa"
+                   template="Magento_Theme::html/title.phtml"
+                   before="page.messages"
+                   cacheable="false">
+                <block class="Atoa\AtoaPayment\Block\Html\Title"
+                       name="atoa.message"
+                       template="Atoa_AtoaPayment::html/message.phtml"
+                       cacheable="false" />
+            </block>
+        </referenceContainer>
+    </body>
+</page>

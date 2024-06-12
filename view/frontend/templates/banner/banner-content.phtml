@@ -1,0 +1,28 @@
+<?php
+/** @var Template $block */
+/** @var Display $viewModel */
+
+use Atoa\AtoaPayment\ViewModel\Display;
+use Magento\Framework\View\Element\Template;
+
+$viewModel = $block->getData('view_model');
+$bannerStyles = $viewModel->getDisplayStyles();
+$contentText = $viewModel->getBannerContent();
+?>
+<div class="banner-content">
+    <?php foreach ($contentText as $content): ?>
+        <?php if ($content === '{{logo}}'): ?>
+            <span class="icon"></span>
+        <?php else: ?>
+            <span><?= /* @noEscape */ $content ?></span>
+        <?php endif;?>
+    <?php endforeach;?>
+    <?php if ($viewModel->isEnableInformationPopup()): ?>
+        <a data-popup-trigger="atoa-information-trigger"
+           href="#"
+           class="more-info"
+           title="<?= /* @noEscape */ __('More Info') ?>">
+            <span><?= /* @noEscape */ __('More Info') ?></span>
+        </a>
+    <?php endif ?>
+</div>

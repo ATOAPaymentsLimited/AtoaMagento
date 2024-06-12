@@ -1,0 +1,23 @@
+<routes xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+        xsi:noNamespaceSchemaLocation="urn:magento:module:Magento_Webapi:etc/webapi.xsd">
+    <route url="/V1/atoa/:orderId/redirect" method="POST">
+        <service class="Atoa\AtoaPayment\Api\RedirectInterface" method="redirect" />
+        <resources>
+            <resource ref="anonymous" />
+        </resources>
+    </route>
+
+    <route url="/V1/atoa/webhook" method="POST">
+        <service class="Atoa\AtoaPayment\Api\WebhookInterface" method="execute" />
+        <resources>
+            <resource ref="anonymous" />
+        </resources>
+    </route>
+
+    <route url="/V1/atoa/expiredWebhook" method="POST">
+        <service class="Atoa\AtoaPayment\Api\ExpiredWebhookInterface" method="execute" />
+        <resources>
+            <resource ref="anonymous" />
+        </resources>
+    </route>
+</routes>

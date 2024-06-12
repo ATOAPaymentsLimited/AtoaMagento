@@ -1,0 +1,467 @@
+@atoa-primary-color: #e42646;
+@atoa-claret-color: #4c0105;
+@atoa-color-grey: #f2f2f2;
+
+
+//
+//  Common
+//  _____________________________________________
+
+& when (@media-common = true) {
+    .atoa-payment-page,
+    .atoa-payment-listing-page,
+    .atoa-payment-product-page {
+        .sections.nav-sections {
+            margin: 0;
+        }
+
+        .atoa-payment-banner {
+            font-size: 18px;
+            font-weight: 700;
+            margin-bottom: 20px;
+            padding: 15px 0;
+
+            .banner-content {
+                align-items: center;
+                display: flex;
+                gap: 15px;
+                justify-content: center;
+            }
+
+            .icon {
+                background-size: 80px auto;
+                display: inline-block;
+                height: 33px;
+                width: 80px;
+            }
+
+            .more-info {
+                background-size: 20px auto;
+                display: inline-block;
+                height: 20px;
+                text-indent: -9999em;
+                width: 20px;
+            }
+
+            &.style1 {
+                background: @atoa-primary-color;
+                color: @color-white;
+
+                .icon {
+                    background-image: url('@{baseDir}Atoa_AtoaPayment/images/atoa-white-icon.png');
+                }
+
+                .more-info {
+                    background-image: url('@{baseDir}Atoa_AtoaPayment/images/i-icon-white.png');
+                }
+            }
+
+            &.style2 {
+                background: @atoa-color-grey;
+                color: @atoa-claret-color;
+
+                .icon {
+                    background-image: url('@{baseDir}Atoa_AtoaPayment/images/atoa-claret-icon.png');
+                }
+
+                .more-info {
+                    background-image: url('@{baseDir}Atoa_AtoaPayment/images/i-icon-claret.png');
+                }
+            }
+
+            &.style3 {
+                background: @color-white;
+                color: @atoa-claret-color;
+
+                .icon {
+                    background-image: url('@{baseDir}Atoa_AtoaPayment/images/atoa-claret-icon.png');
+                }
+
+                .more-info {
+                    background-image: url('@{baseDir}Atoa_AtoaPayment/images/i-icon-claret.png');
+                }
+            }
+        }
+    }
+
+    .atoa-payment-listing-page {
+        .atoa-payment-banner.product-listing-banner,
+        .atoa-payment-banner.cart-page {
+            border-radius: 3px;
+            font-size: 10px;
+            padding: 5px;
+
+            .banner-content {
+                gap: 5px;
+            }
+
+            .icon {
+                background-size: 35px auto;
+                height: 15px;
+                width: 35px;
+            }
+
+            .more-info {
+                background-size: 14px auto;
+                height: 14px;
+                width: 14px;
+            }
+        }
+    }
+
+    .checkout-cart-index {
+        .atoa-payment-banner.cart-page {
+            border-radius: 3px;
+            font-size: 14px;
+            padding: 5px;
+
+            .banner-content {
+                gap: 5px;
+            }
+
+            .icon {
+                background-size: 35px auto;
+                height: 15px;
+                width: 35px;
+            }
+
+            .more-info {
+                background-size: 14px auto;
+                height: 14px;
+                width: 14px;
+            }
+        }
+    }
+
+    /* Popup Information */
+
+    .checkout-index-index .atoa-information-modal-popup.modal-popup,
+    .atoa-information-modal-popup.modal-popup {
+        .modal-inner-wrap {
+            background: @color-white;
+            border-radius: 20px;
+            left: 50%;
+            margin-left: -300px;
+            width: 600px;
+
+            .modal-header {
+                padding: 15px 0 0;
+            }
+
+            .modal-content {
+                padding: 0;
+
+                .atoa-information-modal {
+                    .info-content {
+                        padding: 0 25px 25px;
+                    }
+                }
+
+                .heading {
+                    .lib-css(color, @atoa-primary-color);
+                    display: block;
+                    font-size: 30px;
+                    font-weight: 700;
+                    line-height: 40px;
+                    margin: 15px 0;
+                }
+
+                ul {
+                    list-style: none;
+                    margin: 0;
+                    padding: 0;
+
+                    li {
+                        align-items: center;
+                        display: flex;
+                        font-size: 16px;
+                        font-weight: bold;
+                        gap: 10px;
+                        .lib-css(color, @atoa-claret-color);
+                        margin: 10px 0 0;
+                    }
+                }
+
+                .active-banks {
+                    background: @atoa-color-grey;
+                    border-radius: 0 0 20px 20px;
+                    padding: 10px 25px;
+                    text-align: center;
+
+                    img {
+                        display: inline-block;
+                        max-width: 70%;
+                    }
+                }
+            }
+        }
+    }
+
+    .atoa-payment-title {
+        align-items: start;
+        display: flex;
+        gap: 5px;
+
+        .atoa-payment-label {
+            .atoa-payment-checkout {
+                border: 2px solid;
+                border-radius: 20px;
+                display: block;
+                margin-top: 10px;
+                overflow: hidden;
+
+                .payment-text {
+                    align-items: center;
+                    box-sizing: border-box;
+                    display: flex;
+                    font-size: 18px;
+                    font-weight: bold;
+                    justify-content: space-between;
+                    padding: 10px 20px 10px 70px;
+                    position: relative;
+
+                    &:before {
+                        background-image: url('@{baseDir}Atoa_AtoaPayment/images/lock-caret-icon@2x.png');
+                        background-size: 33px auto;
+                        content: '';
+                        display: block;
+                        height: 33px;
+                        left: 20px;
+                        margin-top: -16px;
+                        position: absolute;
+                        top: 50%;
+                        width: 33px;
+                    }
+
+                    .icon {
+                        background-size: 80px auto;
+                        display: inline-block;
+                        height: 33px;
+                        width: 80px;
+                    }
+                }
+
+                .bank-support {
+                    box-sizing: border-box;
+                    display: block;
+                    padding: 10px 20px;
+
+                    .logo-desktop {
+                        display: block;
+                    }
+
+                    .logo-mobile {
+                        display: none;
+                    }
+                }
+
+                &.style1 {
+                    border-color: @atoa-primary-color;
+
+                    .payment-text {
+                        background: @atoa-primary-color;
+                        color: @color-white;
+
+                        &:before {
+                            background-image: url('@{baseDir}Atoa_AtoaPayment/images/lock-white-icon@2x.png');
+                        }
+
+                        .icon {
+                            background-image: url('@{baseDir}Atoa_AtoaPayment/images/atoa-white-icon.png');
+                        }
+
+                        .more-info {
+                            background-image: url('@{baseDir}Atoa_AtoaPayment/images/i-icon-white.png');
+                        }
+                    }
+                }
+
+                &.style2 {
+                    border-color: @atoa-color-grey;
+
+                    .payment-text {
+                        background: @atoa-color-grey;
+                        .lib-css(color, @atoa-claret-color);
+
+                        .icon {
+                            background-image: url('@{baseDir}Atoa_AtoaPayment/images/atoa-claret-icon.png');
+                        }
+
+                        .more-info {
+                            background-image: url('@{baseDir}Atoa_AtoaPayment/images/i-icon-claret.png');
+                        }
+                    }
+                }
+
+                &.style3 {
+                    border-color: @atoa-color-grey;
+
+                    .payment-text {
+                        background: @color-white;
+                        border-bottom: 2px solid @atoa-color-grey;
+                        .lib-css(color, @atoa-claret-color);
+
+                        .icon {
+                            background-image: url('@{baseDir}Atoa_AtoaPayment/images/atoa-claret-icon.png');
+                        }
+
+                        .more-info {
+                            background-image: url('@{baseDir}Atoa_AtoaPayment/images/i-icon-claret.png');
+                        }
+                    }
+                }
+            }
+        }
+    }
+
+    .atoa-payment-page.checkout-onepage-success {
+        .checkout-success {
+            iframe {
+                border: none;
+                margin: 0 -12px;
+            }
+        }
+    }
+}
+
+//
+//  Mobile
+//  _____________________________________________
+
+.media-width(@extremum, @break) when (@extremum = 'max') and (@break = @screen__s) {
+    .atoa-payment-page,
+    .atoa-payment-listing-page,
+    .atoa-payment-product-page {
+        .atoa-payment-banner {
+            font-size: 11px;
+            font-weight: 700;
+            margin-bottom: 20px;
+            padding: 8px 0;
+
+            .banner-content {
+                gap: 5px;
+            }
+
+            .icon {
+                background-size: 35px auto;
+                height: 15px;
+                width: 35px;
+            }
+
+            .more-info {
+                background-size: 14px auto;
+                height: 14px;
+                width: 14px;
+            }
+        }
+    }
+}
+
+.media-width(@extremum, @break) when (@extremum = 'max') and (@break = @screen__m) {
+    .atoa-information-modal-popup.modal-popup {
+        .modal-inner-wrap {
+            background: @color-white;
+            border-radius: 0;
+
+            .modal-content {
+                .active-banks {
+                    background: transparent !important;
+
+                    img {
+                        max-width: 80%;
+                    }
+                }
+            }
+
+            .modal-content {
+                padding: 0;
+
+                .heading {
+                    .lib-css(color, @atoa-primary-color);
+                    display: block;
+                    font-size: 18px;
+                    font-weight: 700;
+                    line-height: 25px;
+                    margin: 10px 0;
+                }
+
+                ul {
+                    list-style: none;
+                    margin: 0;
+                    padding: 0;
+
+                    li {
+                        font-size: 14px;
+                        font-weight: bold;
+                    }
+                }
+            }
+        }
+    }
+    .checkout-index-index .atoa-information-modal-popup.modal-popup.modal-slide {
+        .modal-inner-wrap {
+            background: @color-white;
+            border-radius: 0;
+            margin: 0;
+            width: auto;
+
+            .modal-content {
+                padding: 0;
+
+                .heading {
+                    .lib-css(color, @atoa-primary-color);
+                    display: block;
+                    font-size: 18px;
+                    font-weight: 700;
+                    line-height: 25px;
+                    margin: 10px 0;
+                }
+
+                ul {
+                    list-style: none;
+                    margin: 0;
+                    padding: 0;
+
+                    li {
+                        font-size: 14px;
+                        font-weight: bold;
+                    }
+                }
+            }
+        }
+    }
+    .atoa-payment-title {
+        .atoa-payment-label {
+            .atoa-payment-checkout {
+                .payment-text {
+                    font-size: 14px;
+                    padding: 10px 10px 10px 40px;
+
+                    &:before {
+                        background-size: 24px auto;
+                        height: 24px;
+                        left: 10px;
+                        margin-top: -12px;
+                        width: 24px;
+                    }
+
+                    .icon {
+                        background-size: 35px auto;
+                        height: 15px;
+                        width: 35px;
+                    }
+                }
+
+                .bank-support {
+                    .logo-desktop {
+                        display: none;
+                    }
+
+                    .logo-mobile {
+                        display: block;
+                    }
+                }
+            }
+        }
+    }
+}
