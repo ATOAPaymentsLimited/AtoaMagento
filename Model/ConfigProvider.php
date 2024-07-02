@@ -1,4 +1,9 @@
 <?php
+/**
+ * @author    Tigren Solutions <info@tigren.com>
+ * @copyright Copyright (c) 2024 Tigren Solutions <https://www.tigren.com>. All rights reserved.
+ * @license   Open Software License ("OSL") v. 3.0
+ */
 declare(strict_types=1);
 
 namespace Atoa\AtoaPayment\Model;
@@ -37,19 +42,6 @@ class ConfigProvider
     public function getConfig(string $field, ?string $scope = ScopeInterface::SCOPE_STORE): mixed
     {
         return $this->scopeConfig->getValue(self::MODULE_CONFIG_PREFIX . $field, $scope);
-    }
-
-    /**
-     * Is Sandbox
-     *
-     * @return bool
-     */
-    public function isSandbox(): bool
-    {
-        return $this->scopeConfig->isSetFlag(
-            self::MODULE_CONFIG_PREFIX . Atoa::IS_SANDBOX,
-            ScopeInterface::SCOPE_STORE
-        );
     }
 
     /**

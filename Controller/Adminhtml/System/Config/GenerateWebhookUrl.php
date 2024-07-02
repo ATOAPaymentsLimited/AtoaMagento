@@ -1,4 +1,9 @@
 <?php
+/**
+ * @author    Tigren Solutions <info@tigren.com>
+ * @copyright Copyright (c) 2024 Tigren Solutions <https://www.tigren.com>. All rights reserved.
+ * @license   Open Software License ("OSL") v. 3.0
+ */
 declare(strict_types=1);
 
 namespace Atoa\AtoaPayment\Controller\Adminhtml\System\Config;
@@ -17,7 +22,6 @@ use Magento\Store\Model\StoreManagerInterface;
 class GenerateWebhookUrl extends Action
 {
     private const END_POINT = 'https://api.atoa.me/api/webhook/merchant';
-    private const SANDBOX_END_POINT = 'https://devapi.atoa.me/api/webhook/merchant';
 
     /**
      * @var CurlFactory
@@ -72,17 +76,11 @@ class GenerateWebhookUrl extends Action
         $result = $this->resultFactory->create(ResultFactory::TYPE_JSON);
         $this->logger->debug('[START GENERATE WEBHOOK URL]');
         try {
-            $isSandbox = $this->_request->getParam('is_sandbox');
-
-            $endpoint = self::END_POINT;
-            if ($isSandbox) {
-                $endpoint = self::SANDBOX_END_POINT;
-            }
             $params = [
                 'url' => $this->storeManager->getStore()->getBaseUrl() . 'rest/V1/atoa/webhook',
                 'event' => 'PAYMENTS_STATUS'
             ];
-            $this->logger->debug('[GENERATE WEBHOOK URL ENDPOINT]', [$endpoint]);
+            $this->logger->debug('[GENERATE WEBHOOK URL ENDPOINT]', [self::END_POINT]);
             $this->logger->debug('[GENERATE WEBHOOK URL PARAMS]', [$params]);
             $curl = $this->curlFactory->create();
             $curl->setHeaders([
@@ -90,7 +88,7 @@ class GenerateWebhookUrl extends Action
                 'Content-Type' => 'application/json'
             ]);
 
-            $curl->post($endpoint, json_encode($params));
+            $curl->post(self::END_POINT, json_encode($params));
             $response = json_decode($curl->getBody(), true);
             $this->logger->debug('[GENERATE WEBHOOK URL RESPONSE]', $response);
 
@@ -112,8 +110,8 @@ class GenerateWebhookUrl extends Action
                 'event' => 'EXPIRED_STATUS'
             ];
 
-            $curl->post($endpoint, json_encode($params));
-            $this->logger->debug('[GENERATE WEBHOOK EXPIRED URL ENDPOINT]', [$endpoint]);
+            $curl->post(self::END_POINT, json_encode($params));
+            $this->logger->debug('[GENERATE WEBHOOK EXPIRED URL ENDPOINT]', [self::END_POINT]);
             $this->logger->debug('[GENERATE WEBHOOK EXPIRED URL PARAMS]', [$params]);
             $responseWebhookExpired = json_decode($curl->getBody(), true);
             $this->logger->debug('[GENERATE WEBHOOK EXPIRED URL RESPONSE]', $responseWebhookExpired);

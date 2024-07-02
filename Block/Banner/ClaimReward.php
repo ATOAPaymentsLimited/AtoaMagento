@@ -1,4 +1,9 @@
 <?php
+/**
+ * @author    Tigren Solutions <info@tigren.com>
+ * @copyright Copyright (c) 2024 Tigren Solutions <https://www.tigren.com>. All rights reserved.
+ * @license   Open Software License ("OSL") v. 3.0
+ */
 declare(strict_types=1);
 
 namespace Atoa\AtoaPayment\Block\Banner;
@@ -10,7 +15,6 @@ use Magento\Framework\View\Element\Template\Context;
 
 class ClaimReward extends Template
 {
-    private const CLAIM_CASHBACK_URL_SANDBOX = 'https://devapp.atoa.me/claim-cashback?';
     private const CLAIM_CASHBACK_URL = 'https://atoa.me/claim-cashback?';
 
     /**
@@ -86,7 +90,6 @@ class ClaimReward extends Template
             $params['mobilenumber'] = $this->getMobileNumber();
         }
 
-        return ($this->configProvider->isSandbox() ? self::CLAIM_CASHBACK_URL_SANDBOX : self::CLAIM_CASHBACK_URL)
-            . http_build_query($params);
+        return self::CLAIM_CASHBACK_URL . http_build_query($params);
     }
 }

@@ -1,3 +1,9 @@
+/**
+ * @author    Tigren Solutions <info@tigren.com>
+ * @copyright Copyright (c) 2024 Tigren Solutions <https://www.tigren.com>. All rights reserved.
+ * @license   Open Software License ("OSL") v. 3.0
+ */
+
 define([
     'ko',
     'uiComponent',
@@ -10,7 +16,6 @@ define([
             template: 'Atoa_AtoaPayment/generate-button',
             errorMessage: 'Something when wrong while generate webhook URL.',
             emptyAccessTokenMessage: 'Please fill the "Access Token" field for a generate Webhook URL',
-            isSandbox: 'groups[atoa][fields][is_sandbox][value]',
             accessToken: 'groups[atoa][fields][access_token][value]',
             url: '',
             success: true,
@@ -60,7 +65,6 @@ define([
          * Send request to server to test connection to Adobe Stock API and display the result
          */
         generate: function () {
-            let isSandbox = Number(document.getElementsByName(this.isSandbox)[0].value);
             let accessToken = document.getElementsByName(this.accessToken)[0].value;
 
             if (accessToken.length === 0) {
@@ -75,7 +79,6 @@ define([
                 url: this.url,
                 dataType: 'json',
                 data: {
-                    'is_sandbox': isSandbox,
                     'access_token': accessToken
                 },
                 success: function (response) {
