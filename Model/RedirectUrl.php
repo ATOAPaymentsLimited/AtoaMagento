@@ -13,7 +13,6 @@ use Magento\Store\Model\StoreManagerInterface;
 class RedirectUrl
 {
     private const END_POINT = 'https://api.atoa.me/api/payments/process-payment';
-    private const SANDBOX_END_POINT = 'https://devapi.atoa.me/api/payments/process-payment';
 
     /**
      * @var ConfigProvider
@@ -64,12 +63,6 @@ class RedirectUrl
      */
     public function getRedirectUrl(Order $order): string
     {
-        $isSandbox = $this->configProvider->isSandbox();
-        $endpoint = self::END_POINT;
-        if ($isSandbox) {
-            $endpoint = self::SANDBOX_END_POINT;
-        }
-
         $this->logger->info('[REQUEST_REDIRECT]');
         $data = [
             'customerId' => $order->getBillingAddress()->getEmail(),
@@ -87,7 +80,7 @@ class RedirectUrl
             ],
             'redirectUrl' => $this->storeManager->getStore()->getBaseUrl() . 'atoa/callback',
         ];
-        $this->logger->info('[REQUEST_END_POINT]', [$endpoint]);
+        $this->logger->info('[REQUEST_END_POINT]', [self::END_POINT]);
         $this->logger->info('[REQUEST_PARAMS]', [$data]);
 
         $curl = $this->curlFactory->create();
@@ -98,7 +91,7 @@ class RedirectUrl
                 'Content-Type' => 'application/json'
             ]
         );
-        $curl->post($endpoint, json_encode($data));
+        $curl->post(self::END_POINT, json_encode($data));
 
         $response = json_decode($curl->getBody(), true);
         $this->logger->info('[RESPONSE_REDIRECT]', $response);

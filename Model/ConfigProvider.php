@@ -40,19 +40,6 @@ class ConfigProvider
     }
 
     /**
-     * Is Sandbox
-     *
-     * @return bool
-     */
-    public function isSandbox(): bool
-    {
-        return $this->scopeConfig->isSetFlag(
-            self::MODULE_CONFIG_PREFIX . Atoa::IS_SANDBOX,
-            ScopeInterface::SCOPE_STORE
-        );
-    }
-
-    /**
      * Ts Enable Banner Checkout
      *
      * @return bool

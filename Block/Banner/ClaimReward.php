@@ -10,7 +10,6 @@ use Magento\Framework\View\Element\Template\Context;
 
 class ClaimReward extends Template
 {
-    private const CLAIM_CASHBACK_URL_SANDBOX = 'https://devapp.atoa.me/claim-cashback?';
     private const CLAIM_CASHBACK_URL = 'https://atoa.me/claim-cashback?';
 
     /**
@@ -86,7 +85,6 @@ class ClaimReward extends Template
             $params['mobilenumber'] = $this->getMobileNumber();
         }
 
-        return ($this->configProvider->isSandbox() ? self::CLAIM_CASHBACK_URL_SANDBOX : self::CLAIM_CASHBACK_URL)
-            . http_build_query($params);
+        return self::CLAIM_CASHBACK_URL . http_build_query($params);
     }
 }
