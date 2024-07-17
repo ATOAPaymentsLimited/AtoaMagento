@@ -22,6 +22,7 @@ class Atoa
     public const ENABLE_BANNER_PRODUCT_LISTING = 'atoa_display_settings/enable_banner_product_listing';
     public const ENABLE_BANNER_PRODUCT_DETAIL = 'atoa_display_settings/enable_banner_product_detail';
     public const ENABLE_BANNER_CHECKOUT = 'atoa_checkout_setting/enable_banner_checkout';
+    public const ENABLE_CLAIM_REWARD = 'atoa_checkout_setting/enable_claim_reward';
     public const ENABLE_INFORMATION_POPUP = 'atoa_display_settings/enable_information_popup';
     public const BANNER_STYLES = 'atoa_display_settings/banner_styles';
     public const BANNER_CHECKOUT_STYLES = 'atoa_checkout_setting/banner_styles';

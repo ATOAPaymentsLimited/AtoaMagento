@@ -53,6 +53,19 @@ class ConfigProvider
     }
 
     /**
+     * Ts Enable Claim Reward
+     *
+     * @return bool
+     */
+    public function isEnableClaimReward(): bool
+    {
+        return $this->scopeConfig->isSetFlag(
+            self::MODULE_CONFIG_PREFIX . Atoa::ENABLE_CLAIM_REWARD,
+            ScopeInterface::SCOPE_STORE
+        );
+    }
+
+    /**
      * Ts Enable Information Popup
      *
      * @return bool

@@ -70,7 +70,7 @@ class ClaimReward extends Template
      */
     public function canShowIframe(): bool
     {
-        return $this->getPaymentIdempotencyId() && $this->configProvider->isEnableBannerCheckout();
+        return $this->getPaymentIdempotencyId() && $this->configProvider->isEnableClaimReward();
     }
 
     /**
