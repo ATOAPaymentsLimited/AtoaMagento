@@ -115,6 +115,11 @@
                 </group>
                 <group id="atoa_checkout_setting" translate="label" type="text" sortOrder="195" showInDefault="1" showInWebsite="1" showInStore="1">
                     <label>Checkout Page Setting</label>
+                    <field id="enable_claim_reward" translate="label" type="select" sortOrder="230" showInDefault="1" showInWebsite="1"
+                           showInStore="1">
+                        <label>Enable Claim Reward</label>
+                        <source_model>Magento\Config\Model\Config\Source\Yesno</source_model>
+                    </field>
                     <field id="enable_banner_checkout" translate="label" type="select" sortOrder="230" showInDefault="1" showInWebsite="1"
                            showInStore="1">
                         <label>Enable banner on checkout page</label>
