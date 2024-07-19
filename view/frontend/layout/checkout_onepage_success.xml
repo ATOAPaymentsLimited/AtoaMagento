@@ -6,7 +6,7 @@
             <block class="Atoa\AtoaPayment\Block\Banner\ClaimReward"
                    name="atoa.order.success.claim.reward"
                    before="-"
-                   ifconfig="payment/atoa/atoa_checkout_setting/enable_banner_checkout"
+                   ifconfig="payment/atoa/atoa_checkout_setting/enable_claim_reward"
                    template="Atoa_AtoaPayment::banner/claim-reward.phtml">
                 <arguments>
                     <argument name="view_model" xsi:type="object">

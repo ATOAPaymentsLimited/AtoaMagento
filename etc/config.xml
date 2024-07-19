@@ -30,8 +30,9 @@
                     <banner_styles>1</banner_styles>
                 </atoa_display_settings>
                 <atoa_checkout_setting>
-                    <enable_claim_reward>1</enable_claim_reward>
-                    <enable_banner_checkout>1</enable_banner_checkout>
+                    <show_atoa_cashback>0</show_atoa_cashback>
+                    <enable_claim_reward>0</enable_claim_reward>
+                    <enable_banner_checkout>0</enable_banner_checkout>
                     <banner_styles>1</banner_styles>
                     <banner_checkout_text>Pay securely via your Bank app</banner_checkout_text>
                 </atoa_checkout_setting>
