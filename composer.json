@@ -4,7 +4,7 @@
     "description": "Module Atoa Payment",
     "type": "magento2-module",
     "require": {
-        "magento/framework": "~100.0.4"
+        "magento/framework": ">=103.0.0"
     },
     "license": [
         "Open Software License (OSL)"
