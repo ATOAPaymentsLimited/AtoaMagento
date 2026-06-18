@@ -49,13 +49,10 @@ define(
                 } else {
                     // Fallback: check which radio button is selected
                     let selectedPayment = $('input[name="payment[method]"]:checked').val();
-                    console.log('Selected payment from DOM:', selectedPayment);
                     if (selectedPayment === 'atoa_card') {
                         paymentType = 'CARD';
                     }
                 }
-                
-                console.log('Determined paymentType:', paymentType, 'paymentCode:', paymentCode);
                 return paymentType;
             },
 
