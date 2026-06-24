@@ -52,7 +52,6 @@ interface WebhookInterface
         \Atoa\AtoaPayment\Api\Data\StoreDetailsDataInterface $storeDetails,
         ?string $orderId,
         ?string $paymentRequestId,
-        ?string $signatureHash,
         ?string $signatureHash = null,
         ?string $eventType = null,
         array $redirectUrlParams,
