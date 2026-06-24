@@ -3,6 +3,7 @@
 namespace Atoa\AtoaPayment\Model\Payment;
 
 use Magento\Payment\Model\Method\AbstractMethod;
+use Magento\Quote\Api\Data\CartInterface;
 
 class Card extends AbstractMethod
 {
@@ -10,8 +11,9 @@ class Card extends AbstractMethod
 
     protected $_isOffline = false;
 
-    public function isAvailable(\Magento\Quote\Api\Data\CartInterface $quote = null)
+    public function isAvailable(CartInterface $quote = null): bool
     {
-        return true;
+        return $this->getConfigData('active')
+            && parent::isAvailable($quote);
     }
 }

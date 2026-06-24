@@ -5,7 +5,6 @@ namespace Atoa\AtoaPayment\Api;
 
 use Atoa\AtoaPayment\Api\Data\StatusDetailsDataInterface;
 use Atoa\AtoaPayment\Api\Data\StoreDetailsDataInterface;
-use Magento\Framework\DataObject;
 
 interface WebhookInterface
 {
@@ -30,7 +29,7 @@ interface WebhookInterface
      * @param ?string $orderId
      * @param ?string $paymentRequestId
      * @param ?string $signatureHash
-     * @param DataObject $redirectUrlParams
+     * @param array $redirectUrlParams
      * @param ?string $redirectUrl
      * @param ?string $errorDescription
      * @return WebhookInterface
@@ -54,7 +53,7 @@ interface WebhookInterface
         ?string $orderId,
         ?string $paymentRequestId,
         ?string $signatureHash,
-        \Magento\Framework\DataObject $redirectUrlParams,
+        array $redirectUrlParams,
         ?string $redirectUrl,
         ?string $errorDescription = null,
     ): WebhookInterface;

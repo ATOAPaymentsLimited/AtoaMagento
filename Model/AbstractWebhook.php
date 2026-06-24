@@ -90,15 +90,37 @@ abstract class AbstractWebhook
     /**
      * Validate Request
      *
-     * @param string $orderId
-     * @param string $paymentRequestId
-     * @param string $signatureHash
+     * @param string|null $orderId
+     * @param string|null $paymentRequestId
+     * @param string|null $signatureHash
      * @return bool
      */
-    protected function validateRequest(string $orderId, string $paymentRequestId, string $signatureHash): bool
-    {
-        $accessToken = $this->configProvider->getConfig(Atoa::ACCESS_TOKEN);
-        $signature = hash_hmac('sha256', $orderId . '|' . $paymentRequestId, $accessToken);
-        return $signature === $signatureHash;
+    protected function validateRequest(
+        ?string $orderId,
+        ?string $paymentRequestId,
+        ?string $signatureHash
+    ): bool {
+        if (
+            empty($orderId) ||
+            empty($paymentRequestId) ||
+            empty($signatureHash)
+        ) {
+            return false;
+        }
+
+        $accessToken = $this->configProvider->getConfig(
+            Atoa::ACCESS_TOKEN
+        );
+
+        $signature = hash_hmac(
+            'sha256',
+            $orderId . '|' . $paymentRequestId,
+            $accessToken
+        );
+
+        return hash_equals(
+            $signature,
+            (string)$signatureHash
+        );
     }
 }

@@ -7,7 +7,6 @@ use Atoa\AtoaPayment\Api\Data\StatusDetailsDataInterface;
 use Atoa\AtoaPayment\Api\Data\StoreDetailsDataInterface;
 use Atoa\AtoaPayment\Api\WebhookInterface;
 use Atoa\AtoaPayment\Model\Payment\Atoa;
-use Magento\Framework\DataObject;
 use Magento\Framework\Exception\AlreadyExistsException;
 use Magento\Framework\Exception\LocalizedException;
 use Magento\Sales\Model\Order;
@@ -36,7 +35,7 @@ class Webhook extends AbstractWebhook implements WebhookInterface
      * @param ?string $orderId
      * @param ?string $paymentRequestId
      * @param ?string $signatureHash
-     * @param DataObject $redirectUrlParams
+     * @param array $redirectUrlParams
      * @param ?string $redirectUrl
      * @param ?string $errorDescription
      * @return WebhookInterface
@@ -62,7 +61,7 @@ class Webhook extends AbstractWebhook implements WebhookInterface
         ?string $orderId,
         ?string $paymentRequestId,
         ?string $signatureHash,
-        \Magento\Framework\DataObject $redirectUrlParams,
+        array $redirectUrlParams,
         ?string $redirectUrl,
         ?string $errorDescription = null
     ): WebhookInterface {
@@ -99,7 +98,7 @@ class Webhook extends AbstractWebhook implements WebhookInterface
             'payment_request_id' => $paymentRequestId,
             'signature_hash' => $signatureHash,
             'error_description' => $errorDescription,
-            'redirect_url_params' => $redirectUrlParams->getData(),
+            'redirect_url_params' => $redirectUrlParams,
             'redirect_url' => $redirectUrl
         ]);
         $this->logger->info('[WEBHOOK_PARAMS_END]');

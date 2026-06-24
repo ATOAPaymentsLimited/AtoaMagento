@@ -70,8 +70,8 @@ class RedirectUrl
             'orderId' => $order->getIncrementId(),
             'amount' => $order->getGrandTotal(),
             'currency' => $order->getOrderCurrency() ? $order->getOrderCurrency()->getCode() : 'GBP',
-            'paymentType' => strtoupper($paymentType),
-            "paymentMethod" => [strtoupper($paymentType)],
+            'paymentType' => strtoupper($paymentType),  // Used for redirect flow
+            "paymentMethod" => [strtoupper($paymentType)], // API expects an array of selected payment methods
             'autoRedirect' => false,
             'consumerDetails' => [
                 'phoneCountryCode' => CountryPhoneCode::PHONE_CODE[$order->getBillingAddress()->getCountryId()],
