@@ -53,6 +53,8 @@ interface WebhookInterface
         ?string $orderId,
         ?string $paymentRequestId,
         ?string $signatureHash,
+        ?string $signatureHash = null,
+        ?string $eventType = null,
         array $redirectUrlParams,
         ?string $redirectUrl,
         ?string $errorDescription = null,
