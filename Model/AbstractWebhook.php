@@ -12,6 +12,7 @@ use Magento\Sales\Model\Order\Email\Sender\OrderCommentSender;
 use Magento\Sales\Model\ResourceModel\Order as ResourceOrder;
 use Magento\Sales\Model\ResourceModel\Order\CollectionFactoryInterface;
 use Magento\Sales\Model\Service\InvoiceService;
+use Magento\Framework\App\Request\Http as HttpRequest;
 
 abstract class AbstractWebhook
 {
@@ -29,6 +30,8 @@ abstract class AbstractWebhook
      * @var CollectionFactoryInterface
      */
     protected CollectionFactoryInterface $collectionFactory;
+
+    protected HttpRequest $request;
 
     /**
      * @var ResourceOrder
@@ -70,6 +73,7 @@ abstract class AbstractWebhook
     public function __construct(
         ConfigProvider $configProvider,
         AtoaPaymentLogger $logger,
+        HttpRequest $request,
         CollectionFactoryInterface $collectionFactory,
         ResourceOrder $resourceOrder,
         InvoiceService $invoiceService,
@@ -79,6 +83,7 @@ abstract class AbstractWebhook
     ) {
         $this->configProvider = $configProvider;
         $this->logger = $logger;
+        $this->request = $request;
         $this->collectionFactory = $collectionFactory;
         $this->resourceOrder = $resourceOrder;
         $this->invoiceService = $invoiceService;
@@ -96,31 +101,74 @@ abstract class AbstractWebhook
      * @return bool
      */
     protected function validateRequest(
-        ?string $orderId,
-        ?string $paymentRequestId,
+        string $orderId,
+        string $paymentRequestId,
         ?string $signatureHash
-    ): bool {
-        if (
-            empty($orderId) ||
-            empty($paymentRequestId) ||
-            empty($signatureHash)
-        ) {
+    ): bool
+    {
+        $signatureHeader = $this->request->getHeader('X-Atoa-Signature');
+
+        if (is_string($signatureHeader) && $signatureHeader !== '') {
+            $this->logger->info('[VALIDATE_REQUEST] V2 signature header detected');
+            return $this->validateV2Signature($signatureHeader);
+        }
+
+        $this->logger->info('[VALIDATE_REQUEST] Using V1 signature verification');
+
+        if (empty($signatureHash)) {
+            $this->logger->info('[VALIDATE_REQUEST] No signature found');
             return false;
         }
 
-        $accessToken = $this->configProvider->getConfig(
+        $accessToken = (string) $this->configProvider->getConfig(
             Atoa::ACCESS_TOKEN
         );
 
-        $signature = hash_hmac(
+        $expected = hash_hmac(
             'sha256',
             $orderId . '|' . $paymentRequestId,
             $accessToken
         );
 
+        return hash_equals($expected, $signatureHash);
+    }
+
+    private function validateV2Signature(string $signatureHeader): bool
+    {
+        $signingSecret = (string) $this->configProvider->getConfig(
+            Atoa::WEBHOOK_SIGNING_SECRET
+        );
+
+        if (empty($signingSecret)) {
+            $this->logger->info('[VALIDATE_REQUEST] No signing secret configured');
+            return false;
+        }
+
+        $parts = explode('_', $signingSecret, 2);
+
+        if (count($parts) < 2 || $parts[1] === '') {
+            $this->logger->info('[VALIDATE_REQUEST] Invalid signing secret format');
+            return false;
+        }
+
+        $secret = base64_decode($parts[1]);
+
+        if ($secret === '' || $secret === false) {
+            $this->logger->info('[VALIDATE_REQUEST] Failed to decode signing secret');
+            return false;
+        }
+
+        $rawBody = (string) $this->request->getContent();
+
+        $expected = 'v1=' . hash_hmac(
+            'sha256',
+            $rawBody,
+            $secret
+        );
+
         return hash_equals(
-            $signature,
-            (string)$signatureHash
+            $expected,
+            $signatureHeader
         );
     }
 }
