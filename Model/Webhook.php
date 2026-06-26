@@ -60,10 +60,10 @@ class Webhook extends AbstractWebhook implements WebhookInterface
         \Atoa\AtoaPayment\Api\Data\StoreDetailsDataInterface $storeDetails,
         ?string $orderId,
         ?string $paymentRequestId,
-        ?string $signatureHash = null,
-        ?string $eventType = null,
         array $redirectUrlParams,
         ?string $redirectUrl,
+        ?string $signatureHash = null,
+        ?string $eventType = null,
         ?string $errorDescription = null
     ): WebhookInterface {
         $this->logger->info('*******************************************************************');
