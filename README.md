@@ -5,7 +5,7 @@ Atoa is an Authorised UK Payment Institution (FRN #1007647) powering growth for 
 [![Magento 2.4](https://img.shields.io/badge/Magento-2.4.4%2B-orange)](https://devdocs.magento.com)
 [![PHP 8.2.35+](https://img.shields.io/badge/PHP-8.2.35%2B-blue)](https://www.php.net)
 [![License: OSL-3.0](https://img.shields.io/badge/License-OSL--3.0-green)](https://opensource.org/licenses/OSL-3.0)
-[![Version](https://img.shields.io/badge/Version-2.1.0-brightgreen)](https://github.com/ATOAPaymentsLimited/AtoaMagento/releases)
+[![Version](https://img.shields.io/badge/Version-2.0.1-brightgreen)](https://github.com/ATOAPaymentsLimited/AtoaMagento/releases)
 
 ---
 
@@ -14,6 +14,7 @@ Atoa is an Authorised UK Payment Institution (FRN #1007647) powering growth for 
 - [Payment Methods](#payment-methods)
 - [Features](#features)
 - [Compatibility](#compatibility)
+- [Security](#security)
 - [Prerequisites](#prerequisites)
 - [Installation](#installation)
 - [Configuration](#configuration)
@@ -80,20 +81,25 @@ Atoa is an Authorised UK Payment Institution (FRN #1007647) powering growth for 
 
 ## Security
 
-This module requires **PHP >= 8.2.35**, enforced in `composer.json`, so Composer refuses to
-install it on a runtime below the first 8.2 release patched against CVE-2026-109618 and
-CVE-2026-109619 (the "php2shell" vulnerabilities). PHP 8.1 and earlier 8.2 builds are no
-longer supported.
+Following the NCSC alert of 21 October 2026, this module requires **PHP >= 8.2.35**, enforced
+in `composer.json`, so Composer refuses to install it on a runtime vulnerable to
+CVE-2026-109618 and CVE-2026-109619 (the "php2shell" bugs, both allowing unauthenticated
+remote code execution). The flaws are in PHP itself, not in the module.
 
-A minimum constraint cannot express "patched" on every branch, so if you run a later branch
-make sure you are on a patched release — **8.3.36**, **8.4.27**, or **8.5.12** or later.
+The fixes ship in **PHP 8.2.35, 8.3.36, 8.4.27 and 8.5.12**. PHP 8.0 and 8.1 are end-of-life
+and will not be patched, so they are no longer supported. A single minimum cannot express
+"patched" on the newer branches — unpatched 8.3 (before 8.3.36), 8.4 (before 8.4.27) and 8.5
+(before 8.5.12) all satisfy `>=8.2.35`, so run a patched release on those lines too.
 
-**Distribution-managed servers:** Debian, Ubuntu, RHEL and AlmaLinux back-port security fixes
-without changing the reported version string, so a patched older build (e.g. 8.2.2x) can be
-secure yet still fail this check. There, confirm your PHP is patched and install with
+**Distribution-managed servers:** Debian, Ubuntu, RHEL and AlmaLinux back-port the fix without
+changing the reported version string, so a patched older build (e.g. 8.2.2x) can be secure yet
+still fail this check. There, confirm your PHP is patched and install with
 `--ignore-platform-req=php`.
 
-Refer to the official PHP security advisory for details: https://www.php.net/ChangeLog-8.php
+Advisories:
+
+- CVE-2026-109618 — https://github.com/php/php-src/security/advisories/GHSA-w8hw-w9fx-j79w
+- CVE-2026-109619 — https://github.com/php/php-src/security/advisories/GHSA-6wmf-4rv5-p3rp
 
 ---
 
