@@ -3,9 +3,9 @@
 Atoa is an Authorised UK Payment Institution (FRN #1007647) powering growth for UK businesses. This extension integrates Atoa into your Magento 2 store, enabling customers to pay via instant bank transfer directly from their banking app, or by card — including Visa, Mastercard, Google Pay and Apple Pay — from a single checkout integration.
 
 [![Magento 2.4](https://img.shields.io/badge/Magento-2.4.4%2B-orange)](https://devdocs.magento.com)
-[![PHP 8.1+](https://img.shields.io/badge/PHP-8.1%2B-blue)](https://www.php.net)
+[![PHP 8.2.35+](https://img.shields.io/badge/PHP-8.2.35%2B-blue)](https://www.php.net)
 [![License: OSL-3.0](https://img.shields.io/badge/License-OSL--3.0-green)](https://opensource.org/licenses/OSL-3.0)
-[![Version](https://img.shields.io/badge/Version-2.0.0-brightgreen)](https://github.com/ATOAPaymentsLimited/AtoaMagento/releases)
+[![Version](https://img.shields.io/badge/Version-2.1.0-brightgreen)](https://github.com/ATOAPaymentsLimited/AtoaMagento/releases)
 
 ---
 
@@ -72,25 +72,26 @@ Atoa is an Authorised UK Payment Institution (FRN #1007647) powering growth for 
 
 | Component | Supported Versions |
 |---|---|
-| Magento Open Source | 2.4.4, 2.4.5, 2.4.6, 2.4.7, 2.4.8 |
-| Adobe Commerce | 2.4.4, 2.4.5, 2.4.6, 2.4.7, 2.4.8 |
-| PHP | 8.1, 8.2, 8.3 |
+| Magento Open Source | 2.4.6, 2.4.7, 2.4.8 |
+| Adobe Commerce | 2.4.6, 2.4.7, 2.4.8 |
+| PHP | 8.2.35+, 8.3, 8.4 |
 
 ---
 
 ## Security
 
-The module itself is safe to install, but the **PHP runtime it runs on** must be patched
-against CVE-2026-109618 and CVE-2026-109619 (the "php2shell" vulnerabilities).
+This module requires **PHP >= 8.2.35**, enforced in `composer.json`, so Composer refuses to
+install it on a runtime below the first 8.2 release patched against CVE-2026-109618 and
+CVE-2026-109619 (the "php2shell" vulnerabilities). PHP 8.1 and earlier 8.2 builds are no
+longer supported.
 
-The `require.php` constraint is deliberately left at `>=8.1`: Composer cannot see distro
-back-ported fixes, so pinning a specific upstream version (e.g. `>=8.2.35`) would wrongly
-reject systems that are already patched while still accepting unpatched later releases.
-Enforce the patched runtime at the environment level instead. Run the module on either:
+A minimum constraint cannot express "patched" on every branch, so if you run a later branch
+make sure you are on a patched release — **8.3.36**, **8.4.27**, or **8.5.12** or later.
 
-- An upstream PHP release containing the fix — **8.2.35**, **8.3.36**, **8.4.27**, **8.5.12** or later; or
-- A vendor-patched distribution package — Debian, Ubuntu, RHEL and AlmaLinux back-port the
-  fix without changing the reported version string.
+**Distribution-managed servers:** Debian, Ubuntu, RHEL and AlmaLinux back-port security fixes
+without changing the reported version string, so a patched older build (e.g. 8.2.2x) can be
+secure yet still fail this check. There, confirm your PHP is patched and install with
+`--ignore-platform-req=php`.
 
 Refer to the official PHP security advisory for details: https://www.php.net/ChangeLog-8.php
 
