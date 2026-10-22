@@ -3,9 +3,9 @@
 Atoa is an Authorised UK Payment Institution (FRN #1007647) powering growth for UK businesses. This extension integrates Atoa into your Magento 2 store, enabling customers to pay via instant bank transfer directly from their banking app, or by card — including Visa, Mastercard, Google Pay and Apple Pay — from a single checkout integration.
 
 [![Magento 2.4](https://img.shields.io/badge/Magento-2.4.4%2B-orange)](https://devdocs.magento.com)
-[![PHP 8.1+](https://img.shields.io/badge/PHP-8.1%2B-blue)](https://www.php.net)
+[![PHP 8.2.35+](https://img.shields.io/badge/PHP-8.2.35%2B-blue)](https://www.php.net)
 [![License: OSL-3.0](https://img.shields.io/badge/License-OSL--3.0-green)](https://opensource.org/licenses/OSL-3.0)
-[![Version](https://img.shields.io/badge/Version-2.0.0-brightgreen)](https://github.com/ATOAPaymentsLimited/AtoaMagento/releases)
+[![Version](https://img.shields.io/badge/Version-2.0.1-brightgreen)](https://github.com/ATOAPaymentsLimited/AtoaMagento/releases)
 
 ---
 
@@ -14,6 +14,7 @@ Atoa is an Authorised UK Payment Institution (FRN #1007647) powering growth for 
 - [Payment Methods](#payment-methods)
 - [Features](#features)
 - [Compatibility](#compatibility)
+- [Security](#security)
 - [Prerequisites](#prerequisites)
 - [Installation](#installation)
 - [Configuration](#configuration)
@@ -72,9 +73,33 @@ Atoa is an Authorised UK Payment Institution (FRN #1007647) powering growth for 
 
 | Component | Supported Versions |
 |---|---|
-| Magento Open Source | 2.4.4, 2.4.5, 2.4.6, 2.4.7, 2.4.8 |
-| Adobe Commerce | 2.4.4, 2.4.5, 2.4.6, 2.4.7, 2.4.8 |
-| PHP | 8.1, 8.2, 8.3 |
+| Magento Open Source | 2.4.6, 2.4.7, 2.4.8 |
+| Adobe Commerce | 2.4.6, 2.4.7, 2.4.8 |
+| PHP | 8.2.35+, 8.3, 8.4 |
+
+---
+
+## Security
+
+Following the NCSC alert of 21 October 2026, this module requires **PHP >= 8.2.35**, enforced
+in `composer.json`, so Composer refuses to install it on a runtime vulnerable to
+CVE-2026-109618 and CVE-2026-109619 (the "php2shell" bugs, both allowing unauthenticated
+remote code execution). The flaws are in PHP itself, not in the module.
+
+The fixes ship in **PHP 8.2.35, 8.3.36, 8.4.27 and 8.5.12**. PHP 8.0 and 8.1 are end-of-life
+and will not be patched, so they are no longer supported. A single minimum cannot express
+"patched" on the newer branches — unpatched 8.3 (before 8.3.36), 8.4 (before 8.4.27) and 8.5
+(before 8.5.12) all satisfy `>=8.2.35`, so run a patched release on those lines too.
+
+**Distribution-managed servers:** Debian, Ubuntu, RHEL and AlmaLinux back-port the fix without
+changing the reported version string, so a patched older build (e.g. 8.2.2x) can be secure yet
+still fail this check. There, confirm your PHP is patched and install with
+`--ignore-platform-req=php`.
+
+Advisories:
+
+- CVE-2026-109618 — https://github.com/php/php-src/security/advisories/GHSA-w8hw-w9fx-j79w
+- CVE-2026-109619 — https://github.com/php/php-src/security/advisories/GHSA-6wmf-4rv5-p3rp
 
 ---
 

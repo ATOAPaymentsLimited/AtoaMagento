@@ -1,7 +1,7 @@
 {
     "name": "atoa/module-atoa-payment",
     "description": "Atoa Payment extension for Magento 2. Accept Pay by Bank (Open Banking) and card payments including Visa, Mastercard, Google Pay and Apple Pay. By Atoa, an Authorised UK Payment Institution (FRN #1007647).",
-    "version": "2.0.0",
+    "version": "2.0.1",
     "type": "magento2-module",
     "license": [
         "OSL-3.0"
@@ -25,7 +25,7 @@
         "uk-payments"
     ],
     "require": {
-        "php": ">=8.1",
+        "php": ">=8.2.35",
         "magento/framework": ">=103.0.0"
     },
     "autoload": {
