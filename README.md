@@ -3,7 +3,7 @@
 Atoa is an Authorised UK Payment Institution (FRN #1007647) powering growth for UK businesses. This extension integrates Atoa into your Magento 2 store, enabling customers to pay via instant bank transfer directly from their banking app, or by card — including Visa, Mastercard, Google Pay and Apple Pay — from a single checkout integration.
 
 [![Magento 2.4](https://img.shields.io/badge/Magento-2.4.4%2B-orange)](https://devdocs.magento.com)
-[![PHP 8.1+](https://img.shields.io/badge/PHP-8.1%2B-blue)](https://www.php.net)
+[![PHP 8.2.35+](https://img.shields.io/badge/PHP-8.2.35%2B-blue)](https://www.php.net)
 [![License: OSL-3.0](https://img.shields.io/badge/License-OSL--3.0-green)](https://opensource.org/licenses/OSL-3.0)
 [![Version](https://img.shields.io/badge/Version-2.0.0-brightgreen)](https://github.com/ATOAPaymentsLimited/AtoaMagento/releases)
 
@@ -74,7 +74,7 @@ Atoa is an Authorised UK Payment Institution (FRN #1007647) powering growth for 
 |---|---|
 | Magento Open Source | 2.4.4, 2.4.5, 2.4.6, 2.4.7, 2.4.8 |
 | Adobe Commerce | 2.4.4, 2.4.5, 2.4.6, 2.4.7, 2.4.8 |
-| PHP | 8.1, 8.2, 8.3 |
+| PHP | 8.2.35+, 8.3 |
 
 ---
 
